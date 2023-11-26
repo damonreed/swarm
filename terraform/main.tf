@@ -2,10 +2,29 @@
 # swarm_mon - main.tf 
 #
 
+terraform {
+ backend "gcs" {
+   bucket  = "swarm_mon_tfstate"
+   prefix  = "terraform/state"
+ }
+}
+
 provider "google" {
   project = var.project_id
   region  = var.region
   zone    = var.zone
+}
+
+resource "google_storage_bucket" "swarm_mon_tfstate" {
+  name          = "swarm_mon_tfstate"
+  force_destroy = false
+  location      = "US"
+  storage_class = "STANDARD"
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
 }
 
 resource "google_compute_network" "main" {
