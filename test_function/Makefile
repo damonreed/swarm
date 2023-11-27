@@ -23,6 +23,6 @@ requirements: requirements.txt
 	pip install --no-cache-dir -r ./requirements.txt
 
 local-test:
-    functions-framework --target=test --debug 
+	functions-framework --target=test --debug 
 
 
