@@ -40,8 +40,8 @@ resource "google_compute_subnetwork" "default" {
 }
 
 # Create a single Compute Engine instance
-resource "google_compute_instance" "flask-vm" {
-  name         = "flask-vm"
+resource "google_compute_instance" "control01" {
+  name         = "control01"
   machine_type = "e2-micro"
   tags         = ["ssh"]
 
@@ -50,7 +50,7 @@ resource "google_compute_instance" "flask-vm" {
   }
 
   # Install Flask
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync; pip install flask"
+  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync git; pip install flask"
 
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
