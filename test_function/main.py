@@ -21,4 +21,4 @@ def test(request):
     else:
         host = request.remote_addr
 
-    return f'Hello {host}!'
+    return f'Hello {host}!\n'
