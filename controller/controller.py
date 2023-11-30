@@ -2,12 +2,11 @@
 ### swarm_mon - controller.py - app to coordinate cloud run instances
 ###
 
-from google.auth import compute_engine
-from google.auth.transport.requests import AuthorizedSession
+import google.auth
 
-credentials = compute_engine.Credentials()
+credentials, project = google.auth.default()
 
-authed_session = AuthorizedSession(credentials)
+authed_session = google.auth.transport.requests.AuthorizedSession(credentials)
 
 response = authed_session.get('https://test-container-tnhs7yvhla-uc.a.run.app')
 
