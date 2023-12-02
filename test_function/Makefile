@@ -12,7 +12,7 @@ build: Dockerfile
 run:
 	docker run --rm -d -p 8080:8080 -e PORT=8080 --name test_container $(REPO)/$(IMAGE):$(TAG)
 	sleep 2
-	curl http://localhost:8080
+	curl -X POST -H "Content-Type: application/json" -d '{"host": "foo", "send": "bar"}' 'http://localhost:8080?arg1=baz&arg2=qux'
 	sleep 2
 	docker stop test_container
 
@@ -23,6 +23,7 @@ requirements: requirements.txt
 	pip install --no-cache-dir -r ./requirements.txt
 
 local-test:
-	functions-framework --target=test --debug 
+	functions-framework --target=test --debug &
+	
 
 
